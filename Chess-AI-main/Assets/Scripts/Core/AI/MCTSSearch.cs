@@ -19,8 +19,11 @@
 		Board board;
 		Evaluation evaluation;
 
+		System.Random rand;
+
 		// Diagnostics
 		public SearchDiagnostics Diagnostics { get; set; }
+		System.Diagnostics.Stopwatch searchStopwatch;
 
 		public MCTSSearch(Board board, MCTSSettings settings)
 		{
@@ -28,6 +31,7 @@
 			this.settings = settings;
 			evaluation = new Evaluation();
 			moveGenerator = new MoveGenerator();
+			rand = new System.Random();
 		}
 
 		public void StartSearch()
@@ -60,15 +64,10 @@
 			}
 		}
 
-        void SearchMoves()
+		void SearchMoves()
 		{
-			if (abortSearch)
-			{
-				return;
-			}
-
 			// TODO
-			// Don't forget to make sure to terminate the search once abortSearch is set to true.
+			// Don't forget to end the search once the abortSearch parameter gets set to true.
 		}
 
 		void LogDebugInfo()
@@ -78,6 +77,7 @@
 
 		void InitDebugInfo()
 		{
+			searchStopwatch = System.Diagnostics.Stopwatch.StartNew();
 			// Optional
 		}
 	}

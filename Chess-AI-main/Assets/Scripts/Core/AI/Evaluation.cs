@@ -73,7 +73,11 @@ namespace Chess {
 				}
 			}
 
-			return (float)result / maxBoardValue;
+			var res = (float)result / maxBoardValue;
+			res = (res + 1) / 2;
+
+			return (((float)result / maxBoardValue) + 1) / 2;
+			//return (float)result / maxBoardValue;
 		}
 
 		float EndgamePhaseWeight (int materialCountWithoutPawns) {

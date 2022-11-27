@@ -27,7 +27,7 @@ MonoBehaviour:
     eval: 0
     isBook: 0
     numPositionsEvaluated: 0
-  depth: 10
+  depth: 3
   useIterativeDeepening: 1
   useTranspositionTable: 1
   useFixedDepthSearch: 1
