@@ -68,6 +68,8 @@
         {
             // TODO
             // Don't forget to end the search once the abortSearch parameter gets set to true.
+
+            throw new NotImplementedException();
         }
 
         void LogDebugInfo()
