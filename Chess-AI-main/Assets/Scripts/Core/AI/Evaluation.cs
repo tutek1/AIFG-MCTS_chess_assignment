@@ -15,7 +15,7 @@ namespace Chess {
 		public const int maxBoardValue = 8 * pawnValue + 2 * knightValue + 2 * bishopValue + 2 * rookValue + queenValue + kingValue;
 
 		const float endgameMaterialStart = rookValue * 2 + bishopValue + knightValue;
-		Board board;
+		public Board board;
 
 		/// <summary>
 		/// Performs static evaluation of the current position.
@@ -52,7 +52,9 @@ namespace Chess {
 
 		/// <summary>
 		/// Computes the value of the board state (with respect to the given team)
-		/// by summing up the values of the pieces on the board.
+		/// by summing up the values of the pieces on the board and dividing that
+		/// sum by the maximum possible board value. The result is normalized to
+		/// between 0 and 1.
 		/// </summary>
 		public float EvaluateSimBoard(SimPiece[,] board, bool team)
 		{
@@ -96,7 +98,7 @@ namespace Chess {
 			return 0;
 		}
 
-		int CountMaterial (int colourIndex) {
+		public int CountMaterial (int colourIndex) {
 			int material = 0;
 			material += board.pawns[colourIndex].Count * pawnValue;
 			material += board.knights[colourIndex].Count * knightValue;

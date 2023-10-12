@@ -57,7 +57,14 @@
 		}
 
 
-
+		/// <summary>
+		/// Generates moves for the given board.
+		/// </summary>
+		/// <param name="board"> The board for which to generate moves. </param>
+		/// <param name="isRoot"> Determines whether the given board is taken from the root of the game tree.
+		/// If not, some illegal moves are generated that help the algorithm perform better. </param>
+		/// <param name="includeQuietMoves"> Determines whether non-capturing moves are generated too. </param>
+		/// <returns></returns>
 		public List<Move> GenerateMoves(Board board, bool isRoot, bool includeQuietMoves = true)
 		{
 			if (isRoot)
@@ -107,10 +114,11 @@
 
 
 
-		/// <summary>
-		/// Returns all the possible simmoves for a given team in a given state.
-		/// </summary>
-		public List<SimMove> GetPossibleSimMoves(SimPiece[,] state, bool team)
+        /// <summary>
+        /// Returns all the simmoves for a given team in a given state. Moves are generated even if
+		/// the game is over, so it can’t be used to check whether the game has finished.
+        /// </summary>
+        public List<SimMove> GetSimMoves(SimPiece[,] state, bool team)
 		{
 			var result = new List<SimMove>();
 

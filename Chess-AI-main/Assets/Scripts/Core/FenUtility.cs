@@ -6,6 +6,9 @@
 			['k'] = Piece.King, ['p'] = Piece.Pawn, ['n'] = Piece.Knight, ['b'] = Piece.Bishop, ['r'] = Piece.Rook, ['q'] = Piece.Queen
 		};
 
+		/// <summary>
+		/// Determines the chessboard configuration at the start of the program.
+		/// </summary>
 		public const string startFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 		/// <summary>

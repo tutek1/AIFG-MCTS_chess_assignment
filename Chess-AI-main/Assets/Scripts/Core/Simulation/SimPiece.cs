@@ -16,6 +16,9 @@ namespace Chess
         /// </summary>
         public readonly bool team;
 
+        /// <summary>
+        /// The type of the SimPiece (pawn, rook, etc.).
+        /// </summary>
         public readonly SimPieceType type;
 
         /// <summary>

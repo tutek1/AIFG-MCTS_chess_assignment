@@ -12,7 +12,7 @@ namespace Chess.Game {
 		public event System.Action onPositionLoaded;
 		public event System.Action<Move> onMoveMade;
 
-		public enum PlayerType { Human, AlphaBeta, MCTS }
+		public enum PlayerType { Human, AlphaBeta, MCTS, Other }
 
 		public bool loadCustomPosition;
 		public string customPosition = "1rbq1r1k/2pp2pp/p1n3p1/2b1p3/R3P3/1BP2N2/1P3PPP/1NBQ1RK1 w - - 0 1";
@@ -41,6 +41,10 @@ namespace Chess.Game {
 		public ulong zobristDebug;
 		public Board board { get; private set; }
 		Board searchBoard; // Duplicate version of board used for ai search
+
+		private bool testing = false;
+
+		public bool stopTestingOnFailure;
 
 		void Start () {
 			//Application.targetFrameRate = 60;
@@ -97,6 +101,7 @@ namespace Chess.Game {
 		}
 
 		public void NewGame (bool humanPlaysWhite) {
+			testing = false;
 			boardUI.SetPerspective (humanPlaysWhite);
 			NewGame ((humanPlaysWhite) ? PlayerType.Human : defaultAIType, (humanPlaysWhite) ? defaultAIType : PlayerType.Human);
 		}
@@ -106,8 +111,10 @@ namespace Chess.Game {
 			NewGame (PlayerType.AlphaBeta, PlayerType.MCTS);
 		}
 
-		void NewGame (PlayerType whitePlayerType, PlayerType blackPlayerType) {
-			gameMoves.Clear ();
+		void NewGame (PlayerType whitePlayerType, PlayerType blackPlayerType)
+        {
+            testing = false;
+            gameMoves.Clear ();
 			if (loadCustomPosition) {
 				board.LoadPosition (customPosition);
 				searchBoard.LoadPosition (customPosition);
@@ -126,7 +133,6 @@ namespace Chess.Game {
 			PrintGameResult (gameResult);
 
 			NotifyPlayerToMove ();
-
 		}
 
 		void LogAIDiagnostics () {
@@ -182,7 +188,10 @@ namespace Chess.Game {
 				playerToMove.NotifyTurnToMove ();
 
 			} else {
-				Debug.Log ("Game Over");
+				if (!testing)
+				{
+					Debug.Log("Game Over");
+				}
 			}
 		}
 
@@ -284,12 +293,14 @@ namespace Chess.Game {
 
 		public void StartTestExecution()
         {
+			testing = true;
 			StartCoroutine(ExecuteTests());
         }
 
 		IEnumerator ExecuteTests ()
         {
 			int successes = 0;
+			int failures = 0;
 
 			using (StreamWriter sw = new StreamWriter("./log.txt"))
 			{
@@ -303,7 +314,6 @@ namespace Chess.Game {
 				mctsSettings.promotionsToSearch = MoveGenerator.PromotionMode.All;
 				mctsSettings.limitNumOfPlayouts = true;
 
-				alphaBetaSettings.useThreading = true;
 				alphaBetaSettings.useTimeLimit = true;
 				alphaBetaSettings.searchTimeMillis = 5000;
 				alphaBetaSettings.endlessSearchMode = false;
@@ -373,10 +383,18 @@ namespace Chess.Game {
 					if (gameMoves.Count <= test.numOfMoves * 2 && ((gameResult == Result.BlackIsMated && test.team) || (gameResult == Result.WhiteIsMated && !test.team)))
 					{
 						++successes;
-						sw.WriteLine(line + "SUCCESS");
+                        Debug.Log(line + "PASSED");
+                        sw.WriteLine(line + "SUCCESS");
 					}
 					else {
+						++failures;
+						Debug.Log(line + "FAILED");
 						sw.WriteLine(line + "FAILURE");
+
+						if (stopTestingOnFailure)
+						{
+							break;
+						}
 					}
 				}
 			}
@@ -385,7 +403,7 @@ namespace Chess.Game {
 			string subtitleSettings = $"<color=#787878> <size={subtitleSize}>";
 
 			resultUI.text = "Testing Finished";
-			resultUI.text += subtitleSettings + $"\n{successes} succeeded, {TestSettings.tests.Count - successes} failed";
+			resultUI.text += subtitleSettings + $"\n{successes} succeeded, {failures} failed";
 		}
 	}
 }

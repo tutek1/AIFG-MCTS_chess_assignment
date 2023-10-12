@@ -46,13 +46,6 @@
 		public void MovePiece(int startSquare, int targetSquare)
 		{
 			int pieceIndex = map[startSquare]; // get the index of this element in the occupiedSquares array
-
-			if (pieceIndex >= occupiedSquares.Length)
-            {
-				int x = 5;
-				x -= 2;
-            }
-
 			occupiedSquares[pieceIndex] = targetSquare;
 			map[targetSquare] = pieceIndex;
 		}
