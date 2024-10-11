@@ -99,7 +99,7 @@
 					moveNotation += "+";
 				}
 			}
-			board.UnmakeMove (move, inSearch : true);
+			board.UnmakeMove_DO_NOT_USE (move, inSearch : true);
 
 			return moveNotation;
 		}

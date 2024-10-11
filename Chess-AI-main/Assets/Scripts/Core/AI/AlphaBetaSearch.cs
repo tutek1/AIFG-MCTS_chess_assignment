@@ -178,7 +178,7 @@
 			for (int i = 0; i < moves.Count; i++) {
 				board.MakeMove (moves[i], inSearch : true);
 				int eval = -SearchMoves (depth - 1, plyFromRoot + 1, -beta, -alpha);
-				board.UnmakeMove (moves[i], inSearch : true);
+				board.UnmakeMove_DO_NOT_USE (moves[i], inSearch : true);
 				numNodes++;
 
 				// Move was *too* good, so opponent won't allow this position to be reached
@@ -227,7 +227,7 @@
 			for (int i = 0; i < moves.Count; i++) {
 				board.MakeMove (moves[i], inSearch: true);
 				eval = -QuiescenceSearch (-beta, -alpha);
-				board.UnmakeMove (moves[i], true);
+				board.UnmakeMove_DO_NOT_USE (moves[i], true);
 				numQNodes++;
 
 				if (eval >= beta) {

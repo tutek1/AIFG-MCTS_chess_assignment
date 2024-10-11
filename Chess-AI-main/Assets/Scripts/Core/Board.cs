@@ -287,7 +287,7 @@
         /// <summary>
         /// Undo a move previously made on the board
         /// </summary>
-        public void UnmakeMove(Move move, bool inSearch = false)
+        public void UnmakeMove_DO_NOT_USE(Move move, bool inSearch = false)
         {
 
             //int opponentColour = ColourToMove;

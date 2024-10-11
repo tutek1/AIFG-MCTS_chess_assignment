@@ -146,7 +146,7 @@ namespace Chess.Testing {
 				board.MakeMove (moves[i]);
 				int numNodesFromThisPosition = Search (depth - 1);
 				numLocalNodes += numNodesFromThisPosition;
-				board.UnmakeMove (moves[i]);
+				board.UnmakeMove_DO_NOT_USE (moves[i]);
 			}
 			return numLocalNodes;
 		}
@@ -172,7 +172,7 @@ namespace Chess.Testing {
 				int numNodesFromThisPosition = SearchWithTimingStats (depth - 1);
 				numLocalNodes += numNodesFromThisPosition;
 				if (enableTimingStats) unmakeMoveTimer.Start ();
-				board.UnmakeMove (moves[i]);
+				board.UnmakeMove_DO_NOT_USE (moves[i]);
 				if (enableTimingStats) unmakeMoveTimer.Stop ();
 			}
 			return numLocalNodes;
@@ -192,7 +192,7 @@ namespace Chess.Testing {
 				board.MakeMove (moves[i]);
 				int numMovesForThisNode = SearchDivide (startDepth, currentDepth - 1);
 				numLocalNodes += numMovesForThisNode;
-				board.UnmakeMove (moves[i]);
+				board.UnmakeMove_DO_NOT_USE (moves[i]);
 
 				if (currentDepth == startDepth) {
 

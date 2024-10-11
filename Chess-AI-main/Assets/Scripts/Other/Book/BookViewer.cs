@@ -43,7 +43,7 @@
 			if (Input.GetKeyDown (KeyCode.U)) {
 				if (moves.Count > 0) {
 					var move = moves.Pop ();
-					board.UnmakeMove (move);
+					board.UnmakeMove_DO_NOT_USE (move);
 					if (moves.Count > 0) {
 						boardUI.OnMoveMade (board, moves.Peek ());
 					} else {
