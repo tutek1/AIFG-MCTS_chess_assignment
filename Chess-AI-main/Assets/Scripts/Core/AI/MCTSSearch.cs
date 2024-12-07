@@ -5,7 +5,7 @@
     using System.Threading;
     using UnityEngine;
     using static System.Math;
-    class MCTSSearch : ISearch
+    public class MCTSSearch : ISearch
     {
         public event System.Action<Move> onSearchComplete;
 
@@ -18,6 +18,13 @@
         MCTSSettings settings;
         Board board;
         Evaluation evaluation;
+
+        MCTSNode rootNode;
+        private int numSimulations = 1;
+        public int NumSimulations 
+        {
+            get { return numSimulations; } 
+        }
 
         System.Random rand;
 
@@ -32,6 +39,8 @@
             evaluation = new Evaluation();
             moveGenerator = new MoveGenerator();
             rand = new System.Random();
+            rootNode = new MCTSNode(this, board, Move.InvalidMove, true);
+            rootNode.allPossibleMoves = moveGenerator.GenerateMoves(board, true);
         }
 
         public void StartSearch()
@@ -66,10 +75,28 @@
 
         void SearchMoves()
         {
-            // TODO
-            // Don't forget to end the search once the abortSearch parameter gets set to true.
+            while (!abortSearch)
+            {
+                // Selection step
+                MCTSNode node = rootNode;
 
-            throw new NotImplementedException();
+                while (node.children.Count > 0)
+                {
+                    node = node.SelectBestChild();
+                    if (abortSearch) break;
+                }
+
+                MCTSNode nodeToExpand = node;
+
+                // Expansion
+                // TODO------- ++numSimulations
+
+                // Simulation
+                // TODO-------
+
+                // Backpropagation
+                // TODO------- check and set best move
+            }
         }
 
         void LogDebugInfo()
