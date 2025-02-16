@@ -9,5 +9,7 @@
 		public int eval;
 		public bool isBook;
 		public int numPositionsEvaluated;
+		public int numExpansions;
+		public int maxCompletedDepth;
 	}
 }

@@ -288,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadCustomPosition: 0
   customPosition: 7k/R7/p7/6p1/5p1p/5P1K/r6P/8 w - - 0 1
-  whitePlayerType: 0
+  whitePlayerType: 2
   blackPlayerType: 1
   defaultAIType: 2
   alphaBetaSettings: {fileID: 11400000, guid: 326a8f1e9df86ac47a3299a1e12bce9c, type: 2}
@@ -304,7 +304,7 @@ MonoBehaviour:
   aiDiagnosticsUI: {fileID: 755082375}
   resultUI: {fileID: 1140990944}
   zobristDebug: 0
-  stopTestingOnFailure: 1
+  stopTestingOnFailure: 0
 --- !u!4 &439694611
 Transform:
   m_ObjectHideFlags: 0
@@ -662,11 +662,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1001183584183253378, guid: 4936c63a287c2477daa7c97684cf9ba6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4936c63a287c2477daa7c97684cf9ba6, type: 3}
 --- !u!4 &609161600 stripped
 Transform:
@@ -1503,11 +1499,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1001183584183253378, guid: 4936c63a287c2477daa7c97684cf9ba6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4936c63a287c2477daa7c97684cf9ba6, type: 3}
 --- !u!4 &1173634900 stripped
 Transform:
