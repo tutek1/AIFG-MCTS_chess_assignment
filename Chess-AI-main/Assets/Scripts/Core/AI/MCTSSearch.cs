@@ -154,14 +154,21 @@ namespace Chess
         {
             // Clone the board state using the lightweight clone method
             SimPiece[,] simState = nodeToSimulate.state.GetLightweightClone();
-
+            
             // Set up the simulation variables
             int simulationDepth = 0;
-            bool whiteMove = !nodeToSimulate.state.WhiteToMove;
+            bool whiteMove = nodeToSimulate.state.WhiteToMove;
             bool hasKingBeenCaptured = false;
 
             while (!abortSearch && simulationDepth < settings.playoutDepthLimit)
             {
+                // Check for king capture (end of game)
+                if (IsKingCaptured(simState))
+                {
+                    hasKingBeenCaptured = true;
+                    break;
+                }
+                
                 // Generate possible sim moves for the current state
                 List<SimMove> possibleMoves = moveGenerator.GetSimMoves(simState, whiteMove);
 
@@ -195,13 +202,6 @@ namespace Chess
 
                 // Switch turns
                 whiteMove = !whiteMove;
-
-                // Check for king capture (end of game)
-                if (IsKingCaptured(simState))
-                {
-                    hasKingBeenCaptured = true;
-                    break;
-                }
 
                 simulationDepth++;
             }
